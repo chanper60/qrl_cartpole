@@ -85,6 +85,16 @@ python -c "from qrl_cartpole import DQNAgent, QuantumDQNAgent, Trainer; print('o
 
 ---
 
+## Pre-trained runs
+
+All training runs (checkpoints, TensorBoard event files, and episode videos) are available on Google Drive:
+
+[Download runs/ folder (67 MB)](https://drive.google.com/drive/folders/1p08JuTLsaG4i28ADXBVvG4o67slDE0Z4?usp=sharing)
+
+Download and place the contents under `qrl_cartpole/runs/` to reproduce figures without retraining.
+
+---
+
 ## Reproducing figures
 
 All scripts read from `runs/` and write to `results/`. Run from the `qrl_cartpole/` directory.
