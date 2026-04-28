@@ -1,0 +1,27 @@
+agent_type: "dqn"
+
+# ── Exploration ───────────────────────────────────────────────────────────────
+start_epsilon: 1.0
+end_epsilon: 0.01
+exploration_fraction: 0.1       # matched to qdqn_skolik for fair comparison
+
+# ── Training loop ─────────────────────────────────────────────────────────────
+total_timesteps: 200000
+learning_starts: 10000          # steps before first gradient update
+train_frequency: 10             # steps between gradient updates
+checkpoint_frequency: 50000     # steps between saved checkpoints
+
+# ── Replay buffer ─────────────────────────────────────────────────────────────
+buffer_size: 10000
+batch_size: 128
+
+# ── Q-learning ────────────────────────────────────────────────────────────────
+gamma: 0.99
+tau: 1.0                        # polyak coefficient (1.0 = hard copy)
+target_network_frequency: 500   # env steps between target network syncs
+
+# ── Optimizer ─────────────────────────────────────────────────────────────────
+learning_rate: 2.5e-4
+
+# ── Network architecture ──────────────────────────────────────────────────────
+hidden_dims: [120, 84]

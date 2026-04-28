@@ -1,0 +1,28 @@
+agent_type: "dqn"
+
+# ~200-param classical baseline for scaling sweep
+# Linear(4→28) + ReLU + Linear(28→2) = (4×28+28) + (28×2+2) = 140 + 58 = 198 params
+hidden_dims: [28]
+
+# ── Exploration ────────────────────────────────────────────────────────────────
+start_epsilon: 1.0
+end_epsilon: 0.01
+exploration_fraction: 0.1
+
+# ── Training loop ─────────────────────────────────────────────────────────────
+total_timesteps: 200000
+learning_starts: 10000
+train_frequency: 10
+checkpoint_frequency: 50000
+
+# ── Replay buffer ─────────────────────────────────────────────────────────────
+buffer_size: 10000
+batch_size: 128
+
+# ── Q-learning ────────────────────────────────────────────────────────────────
+gamma: 0.99
+tau: 1.0
+target_network_frequency: 500
+
+# ── Optimizer ─────────────────────────────────────────────────────────────────
+learning_rate: 2.5e-4

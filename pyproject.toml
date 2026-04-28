@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qrl-cartpole"
+version = "0.1.0"
+description = "Hybrid quantum-classical DQN agents for CartPole-v1"
+requires-python = ">=3.10"
+dependencies = [
+    "pennylane>=0.44,<0.46",
+    "pennylane-lightning>=0.44,<0.46",
+    "torch>=2.2",
+    "gymnasium[classic-control]>=1.0",
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+    "tensorboard>=2.16",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "matplotlib>=3.8",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

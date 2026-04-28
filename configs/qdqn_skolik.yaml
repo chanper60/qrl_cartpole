@@ -1,0 +1,33 @@
+agent_type: "qdqn_skolik"
+
+# ── Quantum circuit (Skolik 2022 Table 2 best config) ─────────────────────────
+n_qubits: 4
+n_layers: 5
+# Ansatz: [RX encode + RY·RZ + CZ ring] × 5 layers  (data reuploading)
+# Observables: ⟨Z₀⊗Z₁⟩ and ⟨Z₂⊗Z₃⟩
+# Trainable params: 5×4×2 (VQC) + 4 (w_input) + 2 (w_output) = 46
+
+# ── Exploration ────────────────────────────────────────────────────────────────
+start_epsilon: 1.0
+end_epsilon: 0.01
+exploration_fraction: 0.1    # fast decay: ε reaches 0.01 by step 50k, matches Skolik's schedule
+
+# ── Training loop ──────────────────────────────────────────────────────────────
+total_timesteps: 150000
+learning_starts: 10000
+train_frequency: 10
+checkpoint_frequency: 50000
+
+# ── Replay buffer ──────────────────────────────────────────────────────────────
+buffer_size: 10000
+batch_size: 16            # Skolik uses batch=16
+
+# ── Q-learning ─────────────────────────────────────────────────────────────────
+gamma: 0.99
+tau: 1.0
+target_network_frequency: 30   # Skolik uses 30; 500 was 16× too slow
+
+# ── Optimizer: RMSprop with separate LRs (Skolik Table 2) ─────────────────────
+learning_rate: 0.001         # VQC weights
+learning_rate_input: 0.01    # w_input (per-qubit input scaling)
+learning_rate_output: 0.1    # w_output (per-action output scaling)
